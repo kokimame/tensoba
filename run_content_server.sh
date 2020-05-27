@@ -1,1 +1,1 @@
-http-server /home/kokimame/Dropbox/OpenFSE/src/data -a 192.168.0.10 -p 8887
+http-server /home/kokimame/Dropbox/OpenFSE/src/data --cors -a 192.168.0.10 -p 8887
