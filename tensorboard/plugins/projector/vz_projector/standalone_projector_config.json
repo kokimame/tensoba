@@ -1,6 +1,15 @@
 {
   "embeddings": [
     {
+      "tensorName": "Test Embedding",
+      "tensorShape": [
+        990,
+        256
+      ],
+      "tensorPath": "http://192.168.0.10:8887/emb.tsv",
+      "metadataPath": "http://192.168.0.10:8887/label.tsv"
+    },
+    {
       "tensorName": "Word2Vec 10K",
       "tensorShape": [
         10000,
