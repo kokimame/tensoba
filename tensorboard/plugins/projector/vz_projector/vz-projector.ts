@@ -56,7 +56,8 @@ namespace vz_projector {
     private selectedPointIndices: number[];
     private neighborsOfFirstPoint: knn.NearestEntry[];
     private hoverPointIndex: number;
-    private audioUrl: string;
+    private currentlyPlayingAudio: HTMLAudioElement;
+    private currentAudioUrl: string;
     private editMode: boolean;
 
     private dataProvider: DataProvider;
@@ -88,6 +89,7 @@ namespace vz_projector {
         this.pageViewLogging,
         this.eventLogging
       );
+      this.currentlyPlayingAudio = new Audio();
       this.analyticsLogger.logPageView('embeddings');
 
       if (!util.hasWebGLSupport()) {
@@ -601,14 +603,15 @@ namespace vz_projector {
         if (point.metadata[this.selectedLabelOption]) {
           hoverText = point.metadata[this.selectedLabelOption].toString();
         }
-        if (point.audioUrl != null && this.audioUrl != point.audioUrl) {
-          this.audioUrl = point.audioUrl
-          console.log(point.audioUrl);
-          let audio = new Audio();
-          audio.src = point.audioUrl;
-          audio.load();
-          audio.play();
+        if (point.audioUrl != null && this.currentAudioUrl != point.audioUrl) {
+          this.currentAudioUrl = point.audioUrl
+          this.currentlyPlayingAudio.src = point.audioUrl;
+          this.currentlyPlayingAudio.load();
+          this.currentlyPlayingAudio.play();
         }
+      } else {
+        this.currentAudioUrl = null;
+        this.currentlyPlayingAudio.pause()
       }
       if (this.selectedPointIndices.length === 0) {
         this.statusBar.style.display = hoverText ? null : 'none';
