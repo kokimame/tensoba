@@ -2,7 +2,18 @@
 Add extra features to Tensorboard to facilitate Audio ML research
 
 ### TODO
-- Add "play audio" feature to the embedding projector plugin
+- ✔️Add "play audio" feature to the embedding projector plugin
+- ?
+
+### Run
+Configure ```run_content_server.sh``` first in which you point the location where ```label.tsv```, ```emb.tsv```, and ```audio.tsv``` exist.
+The first two TSV files are the same with the ones used in the original embedding projector which stores embedding vectors and labels in each row. And each row of the last one corresponds to the path to the audio file from which an embedding is generated. You should store all the audio files under the directory ```audio``` in the same directory of the three files.
+
+Then run the following:
+```
+./run_content_server.sh # Enable CORS
+./run_projector.sh
+```
 
 # TensorBoard [![Travis build status](https://travis-ci.org/tensorflow/tensorboard.svg?branch=master)](https://travis-ci.org/tensorflow/tensorboard/) [![GitHub Actions CI](https://github.com/tensorflow/tensorboard/workflows/CI/badge.svg)](https://github.com/tensorflow/tensorboard/actions?query=workflow%3ACI+branch%3Amaster+event%3Apush) [![Compat check PyPI](https://python-compatibility-tools.appspot.com/one_badge_image?package=tensorboard)](https://python-compatibility-tools.appspot.com/one_badge_target?package=tensorboard)
 
