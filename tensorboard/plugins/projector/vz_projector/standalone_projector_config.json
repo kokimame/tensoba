@@ -7,42 +7,8 @@
         256
       ],
       "tensorPath": "http://192.168.0.10:8887/emb.tsv",
-      "metadataPath": "http://192.168.0.10:8887/label.tsv"
-    },
-    {
-      "tensorName": "Word2Vec 10K",
-      "tensorShape": [
-        10000,
-        200
-      ],
-      "tensorPath": "https://storage.googleapis.com/embedding-projector/data/word2vec_10000_200d_tensors.bytes",
-      "metadataPath": "https://storage.googleapis.com/embedding-projector/data/word2vec_10000_200d_labels.tsv"
-    },
-    {
-      "tensorName": "Word2Vec All",
-      "tensorShape": [
-        71291,
-        200
-      ],
-      "tensorPath": "https://storage.googleapis.com/embedding-projector/data/word2vec_full_200d_tensors.bytes",
-      "metadataPath": "https://storage.googleapis.com/embedding-projector/data/word2vec_full_200d_labels.tsv",
-      "bookmarksPath": "https://storage.googleapis.com/embedding-projector/data/word2vec_full_bookmarks.txt"
-    },
-    {
-      "tensorName": "Mnist with images",
-      "tensorShape": [
-        10000,
-        784
-      ],
-      "tensorPath": "https://storage.googleapis.com/embedding-projector/data/mnist_10k_784d_tensors.bytes",
-      "metadataPath": "https://storage.googleapis.com/embedding-projector/data/mnist_10k_784d_labels.tsv",
-      "sprite": {
-        "imagePath": "https://storage.googleapis.com/embedding-projector/data/mnist_10k_sprite.png",
-        "singleImageDim": [
-          28,
-          28
-        ]
-      }
+      "metadataPath": "http://192.168.0.10:8887/label.tsv",
+      "audioPath" : "http://192.168.0.10:8887/audio.tsv"
     },
     {
       "tensorName": "Iris",

@@ -1,1 +1,1 @@
-http-server /home/kokimame/Dropbox/OpenFSE/src/data --cors -a 192.168.0.10 -p 8887
+http-server /media/kokimame/Work_A_1TB/Project/Master_Files/projector/ --cors -a 192.168.0.10 -p 8887
