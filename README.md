@@ -1,3 +1,9 @@
+# Tensoba
+Add extra features to Tensorboard to facilitate Audio ML research
+
+### TODO
+- Add "play audio" feature to the embedding projector plugin
+
 # TensorBoard [![Travis build status](https://travis-ci.org/tensorflow/tensorboard.svg?branch=master)](https://travis-ci.org/tensorflow/tensorboard/) [![GitHub Actions CI](https://github.com/tensorflow/tensorboard/workflows/CI/badge.svg)](https://github.com/tensorflow/tensorboard/actions?query=workflow%3ACI+branch%3Amaster+event%3Apush) [![Compat check PyPI](https://python-compatibility-tools.appspot.com/one_badge_image?package=tensorboard)](https://python-compatibility-tools.appspot.com/one_badge_target?package=tensorboard)
 
 TensorBoard is a suite of web applications for inspecting and understanding your
