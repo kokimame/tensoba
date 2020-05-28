@@ -34,6 +34,7 @@ message EmbeddingInfo {
   // Path to the TSV file holding the tensor values. If missing, the tensor
   // is assumed to be stored in the model checkpoint.
   string tensor_path = 6;
+  string audio_path = 7;
 }
 
 message ProjectorConfig {

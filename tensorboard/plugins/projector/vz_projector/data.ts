@@ -48,6 +48,7 @@ namespace vz_projector {
     pointsInfo?: PointMetadata[];
     spriteImage?: HTMLImageElement;
     spriteMetadata?: SpriteMetadata;
+    audioUrls?: string[];
   }
 
   /** A single collection of points which make up a sequence through space. */
@@ -74,6 +75,7 @@ namespace vz_projector {
 
     /** This is where the calculated projections space are cached */
     projections: {[key: string]: number};
+    audioUrl: string;
   }
 
   const IS_FIREFOX = navigator.userAgent.toLowerCase().indexOf('firefox') >= 0;
@@ -230,6 +232,7 @@ namespace vz_projector {
           index: dp.index,
           vector: dp.vector.slice(),
           projections: {} as {[key: string]: number},
+          audioUrl: dp.audioUrl
         };
       });
       return new DataSet(points, this.spriteAndMetadataInfo);
@@ -595,6 +598,9 @@ namespace vz_projector {
       metadata.pointsInfo
         .slice(0, this.points.length)
         .forEach((m, i) => (this.points[i].metadata = m));
+      metadata.audioUrls
+        .slice(0, this.points.length)
+        .forEach((a, i) => (this.points[i].audioUrl = a));
       return true;
     }
 

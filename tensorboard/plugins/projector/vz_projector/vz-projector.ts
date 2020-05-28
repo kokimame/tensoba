@@ -56,6 +56,7 @@ namespace vz_projector {
     private selectedPointIndices: number[];
     private neighborsOfFirstPoint: knn.NearestEntry[];
     private hoverPointIndex: number;
+    private audioUrl: string;
     private editMode: boolean;
 
     private dataProvider: DataProvider;
@@ -147,6 +148,7 @@ namespace vz_projector {
       spriteAndMetadata?: SpriteAndMetadataInfo,
       metadataFile?: string
     ) {
+      console.log('spriteAndMetadata: ', spriteAndMetadata);
       this.dataSetFilterIndices = null;
       this.originalDataSet = ds;
       if (ds != null) {
@@ -598,6 +600,14 @@ namespace vz_projector {
         const point = this.dataSet.points[hoverIndex];
         if (point.metadata[this.selectedLabelOption]) {
           hoverText = point.metadata[this.selectedLabelOption].toString();
+        }
+        if (point.audioUrl != null && this.audioUrl != point.audioUrl) {
+          this.audioUrl = point.audioUrl
+          console.log(point.audioUrl);
+          let audio = new Audio();
+          audio.src = point.audioUrl;
+          audio.load();
+          audio.play();
         }
       }
       if (this.selectedPointIndices.length === 0) {

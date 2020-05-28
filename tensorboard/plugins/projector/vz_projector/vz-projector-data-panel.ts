@@ -487,8 +487,7 @@ namespace vz_projector {
         this.selectedRun,
         this.selectedTensor,
         (ds) => {
-          let metadataFile = this.getEmbeddingInfoByName(this.selectedTensor)
-            .metadataPath;
+          let metadataFile = this.getEmbeddingInfoByName(this.selectedTensor).metadataPath;
           this.dataProvider.retrieveSpriteAndMetadata(
             this.selectedRun,
             this.selectedTensor,

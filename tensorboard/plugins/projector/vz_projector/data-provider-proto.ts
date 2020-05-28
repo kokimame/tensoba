@@ -110,6 +110,7 @@ namespace vz_projector {
           metadata: {},
           projections: null,
           index: i,
+          audioUrl: null
         });
       }
       return new DataSet(points);

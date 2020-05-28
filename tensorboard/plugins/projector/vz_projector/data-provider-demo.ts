@@ -116,6 +116,7 @@ namespace vz_projector {
       }
       retrieveSpriteAndMetadataInfo(
         embedding.metadataPath,
+        embedding.audioPath,
         spriteImagePath,
         embedding.sprite,
         callback

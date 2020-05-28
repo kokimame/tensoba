@@ -17,6 +17,7 @@ namespace vz_projector {
   const NUM_COLORS_COLOR_MAP = 50;
   const MAX_SPRITE_IMAGE_SIZE_PX = 8192;
 
+  export const AUDIO_MSG_ID = 'audio';
   export const METADATA_MSG_ID = 'metadata';
   export const TENSORS_MSG_ID = 'tensors';
 
@@ -42,6 +43,7 @@ namespace vz_projector {
     /** The path to the bookmarks file associated with the tensor. */
     bookmarksPath?: string;
     sprite?: SpriteMetadata;
+    audioPath?: string;
   }
 
   /**
@@ -241,6 +243,7 @@ namespace vz_projector {
           vector: null,
           index: data.length,
           projections: null,
+          audioUrl: null
         };
         // If the first label is not a number, take it as the label.
         if (isNaN(row[0] as any) || numDim === row.length - 1) {
@@ -290,6 +293,7 @@ namespace vz_projector {
               vector: data.subarray(offset, offset + dim),
               index: i,
               projections: null,
+              audioUrl: null
             });
             offset += dim;
           }
@@ -406,6 +410,25 @@ namespace vz_projector {
     });
   }
 
+  export function parseAudioUrl(
+    content: ArrayBuffer
+  ): Promise<string[]> {
+    logging.setModalMessage('Parsing audio URLs...', AUDIO_MSG_ID);
+
+    return new Promise<string[]>((resolve, reject) => {
+      let pointsAudioUrl: string[] = [];
+      streamParse(content, (line: string) => {
+        if (line.trim().length === 0) {
+          return;
+        }
+        pointsAudioUrl.push('http://192.168.0.10:8887/audio/' + line);
+      }).then(() => {
+        logging.setModalMessage(null, AUDIO_MSG_ID);
+        resolve(pointsAudioUrl);
+      });
+    })
+  }
+
   export function fetchImage(url: string): Promise<HTMLImageElement> {
     return new Promise<HTMLImageElement>((resolve, reject) => {
       let image = new Image();
@@ -416,12 +439,56 @@ namespace vz_projector {
     });
   }
 
+  export function fetchAudio(url: string): Promise<HTMLAudioElement> {
+    return new Promise<HTMLAudioElement>((resolve, reject) => {
+      let audio = new Audio();
+      audio.onload = () => resolve(audio);
+      audio.onerror = (err) => reject(err);
+      audio.crossOrigin = '';
+      audio.src = url;
+    })
+  }
+
   export function retrieveSpriteAndMetadataInfo(
     metadataPath: string,
+    audioPath: string,
     spriteImagePath: string,
     spriteMetadata: SpriteMetadata,
     callback: (r: SpriteAndMetadataInfo) => void
   ) {
+    let audioPromise: Promise<string[]> = Promise.resolve([]);
+    if (audioPath) {
+      audioPromise = new Promise<string[]>(
+        (resolve, reject) => {
+          logging.setModalMessage('Fetching audio...', AUDIO_MSG_ID);
+          const request = new XMLHttpRequest();
+          request.open('GET', audioPath);
+          request.responseType = 'arraybuffer';
+          
+          request.onreadystatechange = () => {
+            if (request.readyState === 4) {
+              if (request.status === 200) {
+                // The audio TSV file was successfully retrieved. Parse it.
+                resolve(parseAudioUrl(request.response));
+              } else {
+                // The response contains the error message, but we must convert it
+                // to a string.
+                const errorReader = new FileReader();
+                errorReader.onload = () => {
+                  logging.setErrorMessage(
+                    errorReader.result,
+                    'fetching audio'
+                  );
+                  reject();
+                };
+                errorReader.readAsText(new Blob([request.response]));
+              }
+            }
+          }
+          request.send(null);
+        }
+      )
+    }
     let metadataPromise: Promise<SpriteAndMetadataInfo> = Promise.resolve({});
     if (metadataPath) {
       metadataPromise = new Promise<SpriteAndMetadataInfo>(
@@ -464,11 +531,11 @@ namespace vz_projector {
     }
 
     // Fetch the metadata and the image in parallel.
-    Promise.all([metadataPromise, spritesPromise]).then((values) => {
+    Promise.all([metadataPromise, spritesPromise, audioPromise]).then((values) => {
       if (spriteMsgId) {
         logging.setModalMessage(null, spriteMsgId);
       }
-      const [metadata, spriteImage] = values;
+      const [metadata, spriteImage, audioUrls] = values;
 
       if (
         spriteImage &&
@@ -481,6 +548,7 @@ namespace vz_projector {
             `${MAX_SPRITE_IMAGE_SIZE_PX}px x ${MAX_SPRITE_IMAGE_SIZE_PX}px`
         );
       } else {
+        metadata.audioUrls = audioUrls;
         metadata.spriteImage = spriteImage;
         metadata.spriteMetadata = spriteMetadata;
         try {

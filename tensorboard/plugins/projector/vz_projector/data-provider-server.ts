@@ -121,8 +121,10 @@ namespace vz_projector {
         if (embedding.sprite && embedding.sprite.imagePath) {
           spriteImagePath = `${this.routePrefix}/sprite_image?run=${run}&name=${tensorName}`;
         }
+        let audioPath = 'test to be removed';
         retrieveSpriteAndMetadataInfo(
           metadataPath,
+          audioPath,
           spriteImagePath,
           embedding.sprite,
           callback
