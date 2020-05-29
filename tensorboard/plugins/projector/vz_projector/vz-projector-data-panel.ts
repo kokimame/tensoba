@@ -312,7 +312,7 @@ namespace vz_projector {
         // and those based on metadata columns.
         standardColorOption.push({name: 'Metadata', isSeparator: true});
       }
-      this.colorOptions = standardColorOption.concat(metadataColorOption);
+      this.colorOptions = metadataColorOption.concat(standardColorOption);
     }
 
     private metadataEditorContext(enabled: boolean) {

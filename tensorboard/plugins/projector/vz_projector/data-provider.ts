@@ -14,7 +14,7 @@ limitations under the License.
 ==============================================================================*/
 namespace vz_projector {
   /** Maximum number of colors supported in the color map. */
-  const NUM_COLORS_COLOR_MAP = 50;
+  const NUM_COLORS_COLOR_MAP = 500;
   const MAX_SPRITE_IMAGE_SIZE_PX = 8192;
 
   export const AUDIO_MSG_ID = 'audio';

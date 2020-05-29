@@ -150,7 +150,6 @@ namespace vz_projector {
       spriteAndMetadata?: SpriteAndMetadataInfo,
       metadataFile?: string
     ) {
-      console.log('spriteAndMetadata: ', spriteAndMetadata);
       this.dataSetFilterIndices = null;
       this.originalDataSet = ds;
       if (ds != null) {
