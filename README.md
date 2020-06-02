@@ -6,8 +6,21 @@ Add extra features to Tensorboard to facilitate Audio ML research
 - ?
 
 ### Run
-Configure ```run_content_server.sh``` first in which you point the location where ```label.tsv```, ```emb.tsv```, and ```audio.tsv``` exist.
-The first two TSV files are the same with the ones used in the original embedding projector which stores embedding vectors and labels in each row. And each row of the last one corresponds to the path to the audio file from which an embedding is generated. You should store all the audio files under the directory ```audio``` in the same directory of the three files.
+Configure ```run_content_server.sh``` first in which you point to the location where ```label.tsv```, ```emb.tsv```, and ```audio.tsv``` exist.
+The first two TSV files are the same with the ones used in the original embedding projector which stores embedding vectors and labels in each row. Each row of the ```audio.tsv``` corresponds to the **relative** path to the audio file from which an embedding is generated. You should store all the audio files under the directory ```audio``` in the same directory of the three files.
+
+For example, the structure of your files would be as follows. In this case, point to the ```projector``` in ```run_content_server.sh```.
+```
+/projector
+  label.tsv
+  emb.tsv
+  audio.tsv # **Relative** path to corresponding audio files
+  /audio
+    /class A/1.wav
+    /class A/2.wav
+    /class B/1.wav
+    ...
+```
 
 Then run the following:
 ```
