@@ -30,10 +30,19 @@ limitations under the License.
         align-items: center;
         justify-content: space-between;
         padding: 0 24px;
-        height: 60px;
+        height: 54px;
         color: white;
-        background: #560731;
+        background: #000000;
       }
+      #redbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 24px;
+        height: 3px;
+        background: #ff0000;
+      }
+
 
       #appbar .logo {
         font-size: 18px;
@@ -92,6 +101,8 @@ limitations under the License.
             </paper-tooltip>
           </a>
         </div>
+      </div>
+      <div id="redbar">
       </div>
       <vz-projector
         route-prefix="[[routePrefix]]"
