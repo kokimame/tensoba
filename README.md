@@ -6,6 +6,8 @@ Add extra features to Tensorboard to facilitate Audio ML research
 - ?
 
 ### Run
+Install [ibazel](https://github.com/bazelbuild/bazel-watcher) and [http-server](https://github.com/http-party/http-server)
+
 Configure ```run_content_server.sh``` first in which you point to the location where ```label.tsv```, ```emb.tsv```, and ```audio.tsv``` exist.
 The first two TSV files are the same with the ones used in the original embedding projector which stores embedding vectors and labels in each row. Each row of the ```audio.tsv``` corresponds to the **relative** path to the audio file from which an embedding is generated. You should store all the audio files under the directory ```audio``` in the same directory of the three files.
 
